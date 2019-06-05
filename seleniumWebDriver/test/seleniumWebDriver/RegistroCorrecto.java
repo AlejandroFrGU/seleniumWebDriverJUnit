@@ -1,5 +1,6 @@
 package seleniumWebDriver;
 
+
 import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
 import org.junit.*;
@@ -10,7 +11,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class LoginIncorrecto {
+public class RegistroCorrecto {
   private WebDriver driver;
   private String baseUrl;
   private boolean acceptNextAlert = true;
@@ -18,32 +19,34 @@ public class LoginIncorrecto {
 
   @Before
   public void setUp() throws Exception {
-    //driver = new FirefoxDriver();
-	driver = new HtmlUnitDriver();
+	    //driver = new FirefoxDriver();
+	    driver = new HtmlUnitDriver();
     baseUrl = "https://www.katalon.com/";
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
   }
 
   @Test
-  public void testLoginIncorrecto() throws Exception {
+  public void testRegistroCorrecto() throws Exception {
     driver.get("https://loginejemplo2.azurewebsites.net/");
-    driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Register'])[1]/following::a[1]")).click();
-    driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Password'])[1]/following::button[1]")).click();
+    driver.findElement(By.linkText("Register")).click();
+    driver.findElement(By.id("Input_Email")).click();
+    driver.findElement(By.id("Input_Email")).clear();
+    driver.findElement(By.id("Input_Email")).sendKeys("mimo@hotmail.com");
     driver.findElement(By.id("Input_Password")).click();
     driver.findElement(By.id("Input_Password")).clear();
-    driver.findElement(By.id("Input_Password")).sendKeys("pass");
-    driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Password'])[1]/following::button[1]")).click();
-    driver.findElement(By.id("Input_Email")).clear();
-    driver.findElement(By.id("Input_Email")).sendKeys("pass");
-    driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Password'])[1]/following::button[1]")).click();
-    driver.findElement(By.id("Input_Email")).clear();
-    driver.findElement(By.id("Input_Email")).sendKeys("patata@hotmail.com");
-    driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Password'])[1]/following::button[1]")).click();
+    driver.findElement(By.id("Input_Password")).sendKeys("5Lmimo_");
+    driver.findElement(By.id("Input_ConfirmPassword")).clear();
+    driver.findElement(By.id("Input_ConfirmPassword")).sendKeys("5Lmimo_");
+    driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Confirm password'])[1]/following::button[1]")).click();
+    driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Login'])[1]/following::div[1]")).click();
+    assertEquals("Hello mimo@hotmail.com!", driver.findElement(By.linkText("Hello mimo@hotmail.com!")).getText());
+    driver.findElement(By.linkText("Hello mimo@hotmail.com!")).click();
+    driver.findElement(By.id("personal-data")).click();
+    driver.findElement(By.id("delete")).click();
     driver.findElement(By.id("Input_Password")).click();
     driver.findElement(By.id("Input_Password")).clear();
-    driver.findElement(By.id("Input_Password")).sendKeys("P4tata_");
-    driver.findElement(By.id("account")).submit();
-    driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Hello patata@hotmail.com!'])[1]/following::button[1]")).click();
+    driver.findElement(By.id("Input_Password")).sendKeys("5Lmimo_");
+    driver.findElement(By.id("delete-user")).submit();
   }
 
   @After

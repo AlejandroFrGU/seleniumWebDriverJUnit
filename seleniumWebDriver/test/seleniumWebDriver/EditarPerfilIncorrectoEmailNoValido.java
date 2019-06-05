@@ -1,6 +1,5 @@
 package seleniumWebDriver;
 
-
 import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
 import org.junit.*;
@@ -11,7 +10,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class ContrasenaCorrecta {
+public class EditarPerfilIncorrectoEmailNoValido {
   private WebDriver driver;
   private String baseUrl;
   private boolean acceptNextAlert = true;
@@ -26,40 +25,23 @@ public class ContrasenaCorrecta {
   }
 
   @Test
-  public void testContrasenaCorrecta() throws Exception {
+  public void testEditarPerfilIncorrecto1() throws Exception {
     driver.get("https://loginejemplo2.azurewebsites.net/");
     driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Register'])[1]/following::a[1]")).click();
     driver.findElement(By.id("Input_Email")).click();
     driver.findElement(By.id("Input_Email")).clear();
     driver.findElement(By.id("Input_Email")).sendKeys("prueba@hotmail.com");
+    driver.findElement(By.id("Input_Password")).click();
     driver.findElement(By.id("Input_Password")).clear();
     driver.findElement(By.id("Input_Password")).sendKeys("L4pas_");
     driver.findElement(By.id("account")).submit();
     driver.findElement(By.linkText("Hello prueba@hotmail.com!")).click();
-    driver.findElement(By.id("change-password")).click();
-    driver.findElement(By.id("Input_OldPassword")).click();
-    driver.findElement(By.id("Input_OldPassword")).clear();
-    driver.findElement(By.id("Input_OldPassword")).sendKeys("L4pas_");
-    driver.findElement(By.id("Input_NewPassword")).clear();
-    driver.findElement(By.id("Input_NewPassword")).sendKeys("L4pass_");
-    driver.findElement(By.id("Input_ConfirmPassword")).clear();
-    driver.findElement(By.id("Input_ConfirmPassword")).sendKeys("L4pass_");
-    driver.findElement(By.id("change-password-form")).submit();
-    driver.findElement(By.id("Input_OldPassword")).click();
-    driver.findElement(By.id("Input_OldPassword")).clear();
-    driver.findElement(By.id("Input_OldPassword")).sendKeys("L4pass_");
-    driver.findElement(By.id("Input_NewPassword")).clear();
-    driver.findElement(By.id("Input_NewPassword")).sendKeys("L4pas_");
-    driver.findElement(By.id("Input_ConfirmPassword")).clear();
-    driver.findElement(By.id("Input_ConfirmPassword")).sendKeys("L4pas_");
-    driver.findElement(By.id("change-password-form")).submit();
-    driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Change password'])[1]/following::div[1]")).click();
-    driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Change password'])[1]/following::div[1]")).click();
-    driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Change your account settings'])[1]/following::div[1]")).click();
-    driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Change password'])[1]/following::div[1]")).click();
-    driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Change password'])[1]/following::div[1]")).click();
-    driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Change password'])[1]/following::div[1]")).click();
-    assertTrue(isElementPresent(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Change password'])[1]/following::div[1]")));
+    driver.findElement(By.id("Input_Email")).click();
+    driver.findElement(By.id("Input_Email")).clear();
+    driver.findElement(By.id("Input_Email")).sendKeys("prueba");
+    driver.findElement(By.id("update-profile-button")).click();
+    driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Profile'])[2]/following::li[1]")).click();
+    assertEquals("The Email field is not a valid e-mail address.", driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Profile'])[2]/following::li[1]")).getText());
     driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Hello prueba@hotmail.com!'])[1]/following::button[1]")).click();
   }
 
